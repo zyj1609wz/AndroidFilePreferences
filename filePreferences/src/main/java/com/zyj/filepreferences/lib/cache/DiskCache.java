@@ -1,4 +1,4 @@
-package com.zyj.filepreferences.lib;
+package com.zyj.filepreferences.lib.cache;
 
 import com.zyj.filepreferences.lib.disklrucache.DiskLruCache;
 

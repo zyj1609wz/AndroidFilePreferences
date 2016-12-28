@@ -2,9 +2,10 @@ package com.zyj.filepreferences.lib;
 
 import android.content.Context;
 
+import com.zyj.filepreferences.lib.cache.DiskCache;
+import com.zyj.filepreferences.lib.cache.ExternalSDCardCacheDiskCacheFactory;
 import com.zyj.filepreferences.lib.disklrucache.DiskLruCache;
 import com.zyj.filepreferences.lib.util.LogUtil;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;

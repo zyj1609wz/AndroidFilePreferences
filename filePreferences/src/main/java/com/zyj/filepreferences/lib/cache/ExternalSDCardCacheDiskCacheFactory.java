@@ -1,4 +1,4 @@
-package com.zyj.filepreferences.lib;
+package com.zyj.filepreferences.lib.cache;
 
 import android.app.Activity;
 import android.content.Context;
@@ -60,7 +60,7 @@ public class ExternalSDCardCacheDiskCacheFactory extends DiskCacheFactory {
             String sdroot = Environment.getExternalStorageDirectory().getPath()  ;
             return new File( sdroot , mcacheDirectory ) ;
         }
-        return null ;
+        return new InternalCacheDiskCacheFactory( mcontext , mcacheDirectory ).getCacheDirectory() ;
     }
 
     @Override
