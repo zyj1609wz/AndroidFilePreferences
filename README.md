@@ -1,6 +1,13 @@
 # AndroidFilePreferences
 文件存储
 
+## 使用
+
+```
+compile 'com.zyj.lib:filepreferences:1.0.1'
+
+```
+
 ## 存数据
 
 ```
