@@ -1,10 +1,8 @@
-package com.zyj.filepreferences.lib;
+package com.zyj.filepreferences.lib.cache;
 
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.zyj.filepreferences.lib.cache.DiskCache;
-import com.zyj.filepreferences.lib.cache.ExternalSDCardCacheDiskCacheFactory;
 import com.zyj.filepreferences.lib.disklrucache.DiskLruCache;
 import com.zyj.filepreferences.lib.util.CacheUtil;
 import com.zyj.filepreferences.lib.util.LogUtil;
@@ -42,7 +40,7 @@ public class DiskCacheManager {
         }
     }
 
-    public String read(String key){
+    public String read(String key ){
         if (TextUtils.isEmpty( key )){
             LogUtil.d( "filePreferences: read , the key ==  null" );
             return null ;
@@ -97,16 +95,16 @@ public class DiskCacheManager {
         return  result ;
     }
 
-    public void write( String key , String value){
+    public Boolean write( String key , String value){
         if (TextUtils.isEmpty( key )){
             LogUtil.d( "filePreferences: write , the key ==  null" );
-            return  ;
+            return false ;
         }
 
         DiskLruCache diskLruCache = mdiskCache.getDiskLruCache() ;
         if ( diskLruCache == null ) {
             LogUtil.d( "filePreferences: write , diskLruCache == null" );
-            return;
+            return false ;
         }
 
         String md5Key = CacheUtil.hashKeyForDisk( key ) ;
@@ -125,8 +123,9 @@ public class DiskCacheManager {
                 outputStream.write( bytes );
                 editor.commit();
                 LogUtil.d( "filePreferences : 缓存写入成功");
+                return  true ;
             }
-            diskLruCache.flush();
+
         } catch (IOException e) {
             e.printStackTrace();
             if ( editor != null ){
@@ -136,9 +135,14 @@ public class DiskCacheManager {
                     e1.printStackTrace();
                 }
             }
-
             LogUtil.d( "filePreferences : 缓存写入失败");
         }finally {
+            try {
+                diskLruCache.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             if ( inputStream != null ){
                 try {
                     inputStream.close();
@@ -168,5 +172,6 @@ public class DiskCacheManager {
                 }
             }
         }
+        return false ;
     }
 }

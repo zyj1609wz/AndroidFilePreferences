@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -8,10 +8,72 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="com.zyj.filepreferences.MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/save_sync"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
-</RelativeLayout>
+        android:text="同步存数据"
+        android:padding="10dp"
+        android:background="#ffcc00"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/save_async"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="异步存数据"
+        android:padding="10dp"
+        android:background="#ffcc00"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:textColor="#ffffff"
+        />
+
+    <TextView
+        android:id="@+id/get_sync"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="同步取数据"
+        android:padding="10dp"
+        android:background="#ff5566"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        />
+
+    <TextView
+        android:id="@+id/get_async"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="异步取数据"
+        android:padding="10dp"
+        android:background="#ff5566"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        />
+
+    <TextView
+        android:id="@+id/change"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="切换存储模式"
+        android:padding="10dp"
+        android:background="#445566"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        />
+
+
+</LinearLayout>
