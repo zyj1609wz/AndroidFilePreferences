@@ -1,4 +1,4 @@
-package com.zyj.filepreferences.lib;
+package com.zyj.filepreferences.lib.util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

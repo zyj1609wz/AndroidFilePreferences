@@ -20,4 +20,5 @@ public interface DiskCache {
     int getCacheSize() ;
 
     DiskLruCache getDiskLruCache() ;
+
 }

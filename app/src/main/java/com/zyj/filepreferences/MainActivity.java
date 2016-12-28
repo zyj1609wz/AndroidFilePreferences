@@ -1,5 +1,4 @@
 package com.zyj.filepreferences;
-
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -15,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
         FilePreferences.put( this , "abc" , "哈哈哈") ;
         String s = (String) FilePreferences.get( this , "abc" );
+
         Toast.makeText(this, "" + s , Toast.LENGTH_SHORT).show();
     }
 }

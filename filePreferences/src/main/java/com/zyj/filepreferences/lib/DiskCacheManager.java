@@ -1,10 +1,12 @@
 package com.zyj.filepreferences.lib;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.zyj.filepreferences.lib.cache.DiskCache;
 import com.zyj.filepreferences.lib.cache.ExternalSDCardCacheDiskCacheFactory;
 import com.zyj.filepreferences.lib.disklrucache.DiskLruCache;
+import com.zyj.filepreferences.lib.util.CacheUtil;
 import com.zyj.filepreferences.lib.util.LogUtil;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -18,26 +20,33 @@ import java.io.OutputStream;
  */
 public class DiskCacheManager {
 
-    private static DiskCacheManager diskCacheManager;
+    private static DiskCacheManager mdiskCacheManager;
     private DiskCache mdiskCache ;
 
     private DiskCacheManager( Context context ){
-        mdiskCache = new ExternalSDCardCacheDiskCacheFactory( context ) ;
+        if ( mdiskCache == null ){
+            mdiskCache = new ExternalSDCardCacheDiskCacheFactory( context ) ;
+        }
     }
 
     public static DiskCacheManager getInstance( Context context ){
-        if ( diskCacheManager == null ){
-            diskCacheManager = new DiskCacheManager( context ) ;
+        if ( mdiskCacheManager == null ){
+            mdiskCacheManager = new DiskCacheManager( context  ) ;
         }
-        return diskCacheManager;
+        return mdiskCacheManager ;
     }
 
+    public void setDiskCache( DiskCache diskCache ){
+        if ( diskCache != null ){
+            mdiskCache = diskCache ;
+        }
+    }
 
     public String read(String key){
-        String md5Key = CacheUtil.hashKeyForDisk( key );
-        InputStream is = null ;
-        String result = "" ;
-        ByteArrayOutputStream baos = null ;
+        if (TextUtils.isEmpty( key )){
+            LogUtil.d( "filePreferences: read , the key ==  null" );
+            return null ;
+        }
 
         DiskLruCache diskLruCache = mdiskCache.getDiskLruCache() ;
         if ( diskLruCache == null ){
@@ -45,7 +54,14 @@ public class DiskCacheManager {
             return "" ;
         }
 
+        LogUtil.d( "filePreferences: isReading, key: " + key );
+
+        InputStream is = null ;
+        String result = "" ;
+        ByteArrayOutputStream baos = null ;
+
         try {
+            String md5Key = CacheUtil.hashKeyForDisk( key );
             DiskLruCache.Snapshot snapShot = diskLruCache.get(md5Key);
             if ( snapShot != null ){
                 is = snapShot.getInputStream(0);
@@ -77,17 +93,24 @@ public class DiskCacheManager {
                 }
             }
         }
+        LogUtil.d( "filePreferences: read complete , key: " + key +  "   value: " + result );
         return  result ;
     }
 
     public void write( String key , String value){
+        if (TextUtils.isEmpty( key )){
+            LogUtil.d( "filePreferences: write , the key ==  null" );
+            return  ;
+        }
+
         DiskLruCache diskLruCache = mdiskCache.getDiskLruCache() ;
         if ( diskLruCache == null ) {
-            LogUtil.d( "filePreferences: write  diskLruCache == null" );
+            LogUtil.d( "filePreferences: write , diskLruCache == null" );
             return;
         }
 
         String md5Key = CacheUtil.hashKeyForDisk( key ) ;
+
         DiskLruCache.Editor editor = null ;
         InputStream inputStream = null ;
         OutputStream outputStream = null ;
@@ -146,5 +169,4 @@ public class DiskCacheManager {
             }
         }
     }
-
 }

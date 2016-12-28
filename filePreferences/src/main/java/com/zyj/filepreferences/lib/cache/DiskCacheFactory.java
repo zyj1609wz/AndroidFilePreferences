@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public abstract class DiskCacheFactory implements DiskCache {
 
-    private DiskLruCache diskLruCache ;
+    private DiskLruCache mdiskLruCache ;
 
     @Override
     public DiskLruCache getDiskLruCache() {
@@ -26,13 +26,14 @@ public abstract class DiskCacheFactory implements DiskCache {
             return null ;
         }
 
-        if ( diskLruCache == null || ( diskLruCache != null && diskLruCache.isClosed() )){
+        if ( mdiskLruCache == null || ( mdiskLruCache != null && mdiskLruCache.isClosed() )){
             try {
-                diskLruCache =  DiskLruCache.open( cacheDir , APP_VERSION , VALUE_COUNT , getCacheSize() );
+                mdiskLruCache =  DiskLruCache.open( cacheDir , APP_VERSION , VALUE_COUNT , getCacheSize() );
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        return diskLruCache ;
+        return mdiskLruCache ;
     }
+
 }
