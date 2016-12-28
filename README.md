@@ -4,25 +4,28 @@
 ## 存数据
 
 ```
-    /**
-     * 同步的方式，存入数据
-     */
-    void sync_PUT(){
-        boolean result = FilePreferences.put( this , "abc" , "123") ;
-        Toast.makeText(MainActivity.this, "存入数据成功", Toast.LENGTH_SHORT).show();
-    }
+/**
+  * 同步的方式，存入数据
+  */
 
-     /**
-         * 异步的方式，存入数据
-         */
-        void async_PUT(){
-            new FilePreferencesTask( this , "abc" , "123"){
-                @Override
-                protected void callOnMainThread(Object result) {
-                    Toast.makeText(MainActivity.this, "存入数据成功", Toast.LENGTH_SHORT).show();
-                }
-            }.execute();
-        }
+  void sync_PUT(){
+       boolean result = FilePreferences.put( this , "abc" , "123") ;
+       Toast.makeText(MainActivity.this, "存入数据成功", Toast.LENGTH_SHORT).show();
+   }
+
+
+/**
+  * 异步的方式，存入数据
+  */
+
+  void async_PUT(){
+       new FilePreferencesTask( this , "abc" , "123"){
+           @Override
+            protected void callOnMainThread(Object result) {
+                 Toast.makeText(MainActivity.this, "存入数据成功", Toast.LENGTH_SHORT).show();
+            }
+        }.execute();
+      }
 
 ```
 
@@ -30,31 +33,34 @@
 
 ```
 /**
-     * 同步的方式，获取数据
-     */
-    void sync_GET(){
-        String result = (String) FilePreferences.get( this , "abc" );
-        Toast.makeText(MainActivity.this, "取数据: " + result , Toast.LENGTH_SHORT).show();
-    }
+  * 同步的方式，获取数据
+  */
 
- /**
-     * 异步的方式，获取数据
-     */
-    void async_GET(){
-        new FilePreferencesTask( this , "abc" ){
-            @Override
-            protected Object callOnSubThread(Object result) {
-                //运行在子线程
-                return result ;
-            }
+   void sync_GET(){
+       String result = (String) FilePreferences.get( this , "abc" );
+       Toast.makeText(MainActivity.this, "取数据: " + result , Toast.LENGTH_SHORT).show();
+   }
 
-            @Override
-            protected void callOnMainThread(Object result) {
-                //运行在main线程
-                Toast.makeText(MainActivity.this, "取数据: " + result , Toast.LENGTH_SHORT).show();
-            }
-        }.execute();
-    }
+
+/**
+  * 异步的方式，获取数据
+  */
+
+  void async_GET(){
+       new FilePreferencesTask( this , "abc" ){
+           @Override
+           protected Object callOnSubThread(Object result) {
+               //运行在子线程
+               return result ;
+           }
+
+           @Override
+           protected void callOnMainThread(Object result) {
+               //运行在main线程
+               Toast.makeText(MainActivity.this, "取数据: " + result , Toast.LENGTH_SHORT).show();
+           }
+       }.execute();
+   }
 
 ```
 
