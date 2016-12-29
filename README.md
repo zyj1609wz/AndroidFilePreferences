@@ -1,5 +1,4 @@
-# AndroidFilePreferences
-文件存储
+# AndroidFilePreferences 文件存储
 
 ## 使用
 
