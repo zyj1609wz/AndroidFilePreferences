@@ -58,13 +58,25 @@ Filepreferences是文件读写操作，为了不阻塞UI，需要在异步中完
 
 - FilePreferences.setDiskCache( MainActivity.this , new InternalCacheDiskCacheFactory( MainActivity.this ));
 
+## Log
+FilePreferences内置了一个Log类，方便打印Log日志，提供了关闭和打开的方法。建议app在发布的时候，关闭Log。
+- 打开 Log
+
+`FilePreferences.setLog( true );`
+
+- 关闭Log
+
+`FilePreferences.setLog( false );`
+
 
 ## 更新日志
 
 ### `2016/12/29`
 
-- 1、完善说明文档
-- 2、修改回调逻辑
+- 1、1.0.2发布
+- 2、完善说明文档
+- 3、修改回调逻辑
+- 4、新增Log打开和关闭的API
 
 
 ### `2016/12/28`

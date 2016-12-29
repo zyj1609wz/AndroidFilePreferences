@@ -3,20 +3,20 @@ package com.zyj.filepreferences.lib.util;
 import android.util.Log;
 
 /**
- * 日志工具类 使打印日志变得简单 自动识别调用日志函数的类名 方法名 与位置 不需要繁琐的TAG 可以方便的 设置debug模式 发布时候
- * 可以直接修改debug为false 就不会输出日志了
+ * Created by ${zyj} on 2016/9/2.
  */
 public class LogUtil {
 
     /**
-     * true:打开log  false:关闭所有的日志
+     * true: open all log
+     * false: close all log
      */
-    private static boolean OPEN_LOG = true ;
+    private static boolean OPEN_LOG = false ;
 
     /**
      * TAG 名称
      */
-    private static String tag = "yiba_sdk";
+    private static String tag = "filePerferences";
     private String mClassName;
     private static LogUtil log;
     private static final String USER_NAME = "@tool@";
@@ -110,5 +110,9 @@ public class LogUtil {
             default:
                 break;
         }
+    }
+
+    public static void setLog(Boolean log){
+        OPEN_LOG = log ;
     }
 }

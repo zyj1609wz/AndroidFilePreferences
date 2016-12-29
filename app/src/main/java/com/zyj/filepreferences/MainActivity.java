@@ -15,7 +15,8 @@ import com.zyj.filepreferences.lib.cache.InternalCacheDiskCacheFactory;
 public class MainActivity extends AppCompatActivity {
 
     private TextView save_sync  , save_async , get_async , get_sync ,  change_tv ;
-
+    private TextView log_tv ;
+    private boolean log = false ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
         get_async = (TextView) findViewById( R.id.get_async );
 
         change_tv = (TextView) findViewById( R.id.change );
+
+        log_tv = (TextView) findViewById( R.id.log );
 
         save_sync.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +72,16 @@ public class MainActivity extends AppCompatActivity {
                 FilePreferences.setDiskCache( MainActivity.this , new ExternalSDCardCacheDiskCacheFactory( MainActivity.this ));
 
                 FilePreferences.setDiskCache( MainActivity.this , new InternalCacheDiskCacheFactory( MainActivity.this ));
+
+            }
+        });
+
+        log_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                log = !log ;
+                FilePreferences.setLog( false );
+                log_tv.setText( log ? "Log(已打开)" :"Log(已关闭)");
             }
         });
     }
