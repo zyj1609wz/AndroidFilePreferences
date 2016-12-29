@@ -11,21 +11,21 @@ Filepreferences是文件读写操作，为了不阻塞UI，需要在异步中完
 
 ```
    new FilePreferencesTask( this , "abc" , "123"){
-           @Override
-            protected void callOnMainThread(Object result) {
-                 Toast.makeText(MainActivity.this, "存入数据成功", Toast.LENGTH_SHORT).show();
-            }
+       @Override
+       protected void callOnMainThread(Object result) {
+          Toast.makeText(MainActivity.this, "存入数据成功", Toast.LENGTH_SHORT).show();
+       }
    }.execute();
 ```
 ### `异步的方式，获取数据`
 
 ```
    new FilePreferencesTask( this , "abc" ){
-        @Override
-        protected void callOnMainThread(Object result) {
-            //运行在main线程
-            Toast.makeText(MainActivity.this, "取数据: " + result , Toast.LENGTH_SHORT).show();
-         }
+       @Override
+       protected void callOnMainThread(Object result) {
+           //运行在main线程
+           Toast.makeText(MainActivity.this, "取数据: " + result , Toast.LENGTH_SHORT).show();
+       }
     }.execute();
 
 ```
