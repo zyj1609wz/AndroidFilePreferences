@@ -47,7 +47,7 @@ compile 'com.zyj.lib:filepreferences:1.0.1'
    boolean result = FilePreferences.put( this , "abc" , "123") ;
    Toast.makeText(MainActivity.this, "存入数据成功", Toast.LENGTH_SHORT).show();
 
-``
+```
 
 - `同步的方式，获取数据`
 
