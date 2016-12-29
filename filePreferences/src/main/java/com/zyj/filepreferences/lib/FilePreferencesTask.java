@@ -11,8 +11,6 @@ public abstract class FilePreferencesTask extends AsyncTask {
     private Context mcontext ;
     private String mkey ;
     private String mvalue ;
-    //用一个奇怪的数字表示唯一性
-    private String DEFAULT_VALUE= ".0x$.@.;);3;/(;9.*.d/*d..f//u&--%%44,,55..//###..8869..()..++^^$$..</>**--1%34%%." ;
     private int EXECUTE_TYPE = 0 ;
     private final int EXECUTE_TYPE_PUT = 1  ;
     private final int EXECUTE_TYPE_GET = 2  ;
@@ -47,12 +45,8 @@ public abstract class FilePreferencesTask extends AsyncTask {
     }
 
     private Object doInBackground_GET(){
-        Object reslut_1 = FilePreferences.get( mcontext , mkey ) ;
-        Object reslut_2 = callOnSubThread( reslut_1 );
-        if ( DEFAULT_VALUE.equals( reslut_2 )){
-            return reslut_1 ;
-        }
-        return reslut_2 ;
+        Object reslut = FilePreferences.get( mcontext , mkey ) ;
+        return callOnSubThread( reslut );
     }
 
     private Object doInBackground_PUT( ){
@@ -62,7 +56,7 @@ public abstract class FilePreferencesTask extends AsyncTask {
     protected abstract void callOnMainThread( Object result) ;
 
     protected Object callOnSubThread( Object result ) {
-        return DEFAULT_VALUE  ;
+        return result  ;
     }
 
     public void execute(){
