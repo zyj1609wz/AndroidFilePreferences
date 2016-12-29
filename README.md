@@ -1,11 +1,8 @@
 # AndroidFilePreferences 文件存储
 
-## 使用
+## 如何使用
 
-```
-compile 'com.zyj.lib:filepreferences:1.0.1'
-
-```
+-  `compile 'com.zyj.lib:filepreferences:1.0.1'`
 
 ### filepreferences是文件读写操作，为了不阻塞UI，需要在异步中完成。
 
