@@ -25,7 +25,7 @@ Filepreferences是文件读写操作，为了不阻塞UI，需要在异步中完
        @Override
        protected void callOnMainThread(Object result) {
            //run on the UI thread
-           Toast.makeText(MainActivity.this, "取数据: " + result , Toast.LENGTH_SHORT).show();
+           Toast.makeText(MainActivity.this, "the result is : " + result , Toast.LENGTH_SHORT).show();
        }
     }.execute();
 
@@ -45,7 +45,7 @@ Filepreferences是文件读写操作，为了不阻塞UI，需要在异步中完
 
 ```
    String result = (String) FilePreferences.get( this , "abc" );
-   Toast.makeText(MainActivity.this, "取数据: " + result , Toast.LENGTH_SHORT).show();
+   Toast.makeText(MainActivity.this, "the result is : " + result , Toast.LENGTH_SHORT).show();
 ```
 
 
