@@ -5,6 +5,8 @@
 -  `compile 'com.zyj.lib:filepreferences:1.0.1'`
 
 
+## 如何存取数据
+
 Filepreferences是文件读写操作，为了不阻塞UI，需要在异步中完成。
 
 #### `异步的方式，存入数据`
