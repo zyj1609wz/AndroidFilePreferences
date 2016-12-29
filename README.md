@@ -8,68 +8,54 @@ compile 'com.zyj.lib:filepreferences:1.0.1'
 
 ```
 
-## 存数据
+由于filepreferences本身操作是文件读写，为了不阻塞UI，需要在异步中完成。
+
+- `异步的方式，存入数据`
 
 ```
-/**
-  * 同步的方式，存入数据
-  */
-
-  void sync_PUT(){
-       boolean result = FilePreferences.put( this , "abc" , "123") ;
-       Toast.makeText(MainActivity.this, "存入数据成功", Toast.LENGTH_SHORT).show();
-   }
-
-
-/**
-  * 异步的方式，存入数据
-  */
-
-  void async_PUT(){
-       new FilePreferencesTask( this , "abc" , "123"){
+   new FilePreferencesTask( this , "abc" , "123"){
            @Override
             protected void callOnMainThread(Object result) {
                  Toast.makeText(MainActivity.this, "存入数据成功", Toast.LENGTH_SHORT).show();
             }
-        }.execute();
-      }
+   }.execute();
+```
+- `异步的方式，获取数据`
+
+```
+   new FilePreferencesTask( this , "abc" ){
+        @Override
+        protected Object callOnSubThread(Object result) {
+           //运行在子线程
+           return result ;
+        }
+
+        @Override
+        protected void callOnMainThread(Object result) {
+            //运行在main线程
+            Toast.makeText(MainActivity.this, "取数据: " + result , Toast.LENGTH_SHORT).show();
+         }
+    }.execute();
 
 ```
 
-## 异步的方式
+当然也提供了同步的方式操作文件
+
+- `同步的方式，存入数据`
 
 ```
-/**
-  * 同步的方式，获取数据
-  */
+   boolean result = FilePreferences.put( this , "abc" , "123") ;
+   Toast.makeText(MainActivity.this, "存入数据成功", Toast.LENGTH_SHORT).show();
 
-   void sync_GET(){
-       String result = (String) FilePreferences.get( this , "abc" );
-       Toast.makeText(MainActivity.this, "取数据: " + result , Toast.LENGTH_SHORT).show();
-   }
+``
 
-
-/**
-  * 异步的方式，获取数据
-  */
-
-  void async_GET(){
-       new FilePreferencesTask( this , "abc" ){
-           @Override
-           protected Object callOnSubThread(Object result) {
-               //运行在子线程
-               return result ;
-           }
-
-           @Override
-           protected void callOnMainThread(Object result) {
-               //运行在main线程
-               Toast.makeText(MainActivity.this, "取数据: " + result , Toast.LENGTH_SHORT).show();
-           }
-       }.execute();
-   }
+- `同步的方式，获取数据`
 
 ```
+   String result = (String) FilePreferences.get( this , "abc" );
+   Toast.makeText(MainActivity.this, "取数据: " + result , Toast.LENGTH_SHORT).show();
+```
+
 
 ## 切换存储模式
 
