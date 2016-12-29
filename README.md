@@ -47,6 +47,7 @@ Filepreferences是文件读写操作，为了不阻塞UI，需要在异步中完
 ```
    String result = (String) FilePreferences.get( this , "abc" );
    Toast.makeText(MainActivity.this, "the result is : " + result , Toast.LENGTH_SHORT).show();
+
 ```
 
 ## 切换存储模式
