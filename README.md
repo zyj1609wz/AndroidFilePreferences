@@ -91,6 +91,6 @@ FilePreferences.setDiskCache( MainActivity.this , new InternalCacheDiskCacheFact
 
 ### `2016/12/27`
 
--1、1.0.0 发布
+- 1、1.0.0 发布
 
 
