@@ -13,6 +13,7 @@ Filepreferences是文件读写操作，为了不阻塞UI，需要在异步中完
    new FilePreferencesTask( this , "abc" , "123"){
        @Override
        protected void callOnMainThread(Object result) {
+          //run on the UI thread
           Toast.makeText(MainActivity.this, "存入数据成功", Toast.LENGTH_SHORT).show();
        }
    }.execute();
@@ -23,7 +24,7 @@ Filepreferences是文件读写操作，为了不阻塞UI，需要在异步中完
    new FilePreferencesTask( this , "abc" ){
        @Override
        protected void callOnMainThread(Object result) {
-           //运行在main线程
+           //run on the UI thread
            Toast.makeText(MainActivity.this, "取数据: " + result , Toast.LENGTH_SHORT).show();
        }
     }.execute();
@@ -58,6 +59,11 @@ Filepreferences是文件读写操作，为了不阻塞UI，需要在异步中完
 
 
 ## 更新日志
+
+### `2016/12/29`
+
+- 1、完善说明文档
+
 
 ### `2016/12/28`
 
