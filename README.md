@@ -7,9 +7,9 @@ compile 'com.zyj.lib:filepreferences:1.0.1'
 
 ```
 
-由于filepreferences本身操作是文件读写，为了不阻塞UI，需要在异步中完成。
+filepreferences是文件读写操作，为了不阻塞UI，需要在异步中完成。
 
-- `异步的方式，存入数据`
+### `异步的方式，存入数据`
 
 ```
    new FilePreferencesTask( this , "abc" , "123"){
@@ -19,7 +19,7 @@ compile 'com.zyj.lib:filepreferences:1.0.1'
             }
    }.execute();
 ```
-- `异步的方式，获取数据`
+### `异步的方式，获取数据`
 
 ```
    new FilePreferencesTask( this , "abc" ){
@@ -40,7 +40,7 @@ compile 'com.zyj.lib:filepreferences:1.0.1'
 
 当然也提供了同步的方式操作文件
 
-- `同步的方式，存入数据`
+###  `同步的方式，存入数据`
 
 ```
    boolean result = FilePreferences.put( this , "abc" , "123") ;
@@ -48,7 +48,7 @@ compile 'com.zyj.lib:filepreferences:1.0.1'
 
 ```
 
-- `同步的方式，获取数据`
+### `同步的方式，获取数据`
 
 ```
    String result = (String) FilePreferences.get( this , "abc" );
