@@ -5,7 +5,7 @@
 -  `compile 'com.zyj.lib:filepreferences:1.0.1'`
 
 
-#### filepreferences是文件读写操作，为了不阻塞UI，需要在异步中完成。
+Filepreferences是文件读写操作，为了不阻塞UI，需要在异步中完成。
 
 ### `异步的方式，存入数据`
 
@@ -21,12 +21,6 @@
 
 ```
    new FilePreferencesTask( this , "abc" ){
-        @Override
-        protected Object callOnSubThread(Object result) {
-           //运行在子线程
-           return result ;
-        }
-
         @Override
         protected void callOnMainThread(Object result) {
             //运行在main线程
