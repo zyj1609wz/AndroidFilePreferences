@@ -82,12 +82,15 @@ FilePreferences.setDiskCache( MainActivity.this , new InternalCacheDiskCacheFact
 
 # 更新日志
 
-`2016/12/27`
-
-- 1.0.0 发布
-
-`2016/12/28`
+- `2016/12/28`
 
 - 1.0.1 发布
 - 增加异步/同步处理方法
 - 完善数据存取方法
+
+
+- `2016/12/27`
+
+- 1.0.0 发布
+
+
