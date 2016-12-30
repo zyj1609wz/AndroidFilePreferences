@@ -42,7 +42,7 @@ Filepreferences是文件读写操作，为了不阻塞UI，需要在异步中完
    Toast.makeText(MainActivity.this, "存入数据成功", Toast.LENGTH_SHORT).show();
 
 ```
-#### **`同步的方式，获取数据`**
+#### `同步的方式，获取数据`
 
 ```
    String result = (String) FilePreferences.get( this , "abc" );
@@ -70,7 +70,7 @@ FilePreferences内置了一个Log类，方便打印Log日志，提供了关闭�
 
 ## 高级功能
 
-#### **在子线程处理回调的结果**
+- `在子线程处理回调的结果`
 
 异步从文件获取数据的时候，默认是把结果回调在UI线程，可以重写`callOnSubThread`方法，让结果回调在子线程，那么`callOnMainThread`回调的结果将是`callOnSubThread`的返回值。
 
