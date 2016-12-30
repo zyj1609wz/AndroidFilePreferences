@@ -1,5 +1,4 @@
 package com.zyj.filepreferences.lib.util;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -9,7 +8,7 @@ import java.security.NoSuchAlgorithmException;
 public class CacheUtil {
 
     /**
-     * 把url 转成md5作为磁盘缓存的名字
+     * 把key 转成md5作为磁盘缓存的名字
      * @param key
      * @return
      */

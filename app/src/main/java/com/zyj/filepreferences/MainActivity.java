@@ -93,13 +93,13 @@ public class MainActivity extends AppCompatActivity {
         new FilePreferencesTask( this , "abc" ){
             @Override
             protected Object callOnSubThread(Object result) {
-                //运行在子线程
+                //run on the background thread
                 return result ;
             }
 
             @Override
             protected void callOnMainThread(Object result) {
-                //运行在main线程
+                //run on the UI thread
                 Toast.makeText(MainActivity.this, "取数据: " + result , Toast.LENGTH_SHORT).show();
             }
         }.execute();
@@ -112,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
         new FilePreferencesTask( this , "abc" , "123"){
             @Override
             protected void callOnMainThread(Object result) {
+                //run on the UI thread
                 Toast.makeText(MainActivity.this, "存入数据成功", Toast.LENGTH_SHORT).show();
             }
         }.execute();
