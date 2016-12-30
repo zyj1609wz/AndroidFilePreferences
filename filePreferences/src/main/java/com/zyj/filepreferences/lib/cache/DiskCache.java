@@ -10,7 +10,7 @@ import java.io.File;
 
 public interface DiskCache {
 
-    int DEFAULT_DISK_CACHE_SIZE = 25 * 1024 * 1024;  //25MB
+    int DEFAULT_DISK_CACHE_SIZE = 250 * 1024 * 1024;  //250MB
     String DEFAULT_DISK_CACHE_DIR = "filePreferences";
     int APP_VERSION = 1;
     int VALUE_COUNT = 1;
@@ -20,5 +20,7 @@ public interface DiskCache {
     int getCacheSize() ;
 
     DiskLruCache getDiskLruCache() ;
+
+    void clearCache() ;
 
 }

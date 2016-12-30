@@ -90,8 +90,16 @@ FilePreferences内置了一个Log类，方便打印Log日志，提供了关闭�
         }.execute();
 ```
 
+- 清理缓存,需要在子线程中调用
+
+ FilePreferences.cleanCache( MainActivity.this );
 
 ## 更新日志
+### `2016/12/30`
+
+- 1、1.0.3 发布
+- 2、修改缓存默认大小
+
 
 ### `2016/12/29`
 

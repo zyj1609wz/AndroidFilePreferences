@@ -1,4 +1,5 @@
 package com.zyj.filepreferences;
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,10 +11,10 @@ import com.zyj.filepreferences.lib.cache.ExternalCacheDiskCacheFactory;
 import com.zyj.filepreferences.lib.cache.ExternalSDCardCacheDiskCacheFactory;
 import com.zyj.filepreferences.lib.cache.InternalCacheDiskCacheFactory;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private TextView save_sync  , save_async , get_async , get_sync ,  change_tv ;
-    private TextView log_tv ;
+    private TextView log_tv , cleanCache_tv ;
     private boolean log = false ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         change_tv = (TextView) findViewById( R.id.change );
 
         log_tv = (TextView) findViewById( R.id.log );
+        cleanCache_tv = (TextView) findViewById( R.id.cleanCache );
+        cleanCache_tv.setOnClickListener( this );
 
         save_sync.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
 
             public void onClick(View v) {
-               sync_GET();
+                sync_GET();
             }
         });
 
@@ -132,5 +135,25 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(MainActivity.this, "存入数据成功", Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * 清理缓存
+     */
+    void cleanChche(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                FilePreferences.cleanCache( MainActivity.this );
+            }
+        }).start();
+    }
 
+
+    @Override
+    public void onClick(View v) {
+        switch ( v.getId() ){
+            case R.id.cleanCache :
+                cleanChche();
+                break;
+        }
+    }
 }

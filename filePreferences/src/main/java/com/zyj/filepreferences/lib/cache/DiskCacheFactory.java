@@ -36,4 +36,15 @@ public abstract class DiskCacheFactory implements DiskCache {
         return mdiskLruCache ;
     }
 
+    @Override
+    public void clearCache() {
+        DiskLruCache diskLruCache =  getDiskLruCache() ;
+        if ( diskLruCache != null ){
+            try {
+                diskLruCache.delete();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

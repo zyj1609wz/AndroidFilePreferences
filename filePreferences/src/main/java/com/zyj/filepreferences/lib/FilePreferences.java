@@ -3,6 +3,7 @@ import android.content.Context;
 
 import com.zyj.filepreferences.lib.cache.DiskCache;
 import com.zyj.filepreferences.lib.cache.DiskCacheManager;
+import com.zyj.filepreferences.lib.disklrucache.DiskLruCache;
 import com.zyj.filepreferences.lib.util.LogUtil;
 
 /**
@@ -28,5 +29,9 @@ public class FilePreferences {
 
     public static void setLog( Boolean log){
        LogUtil.setLog( log );
+    }
+
+    public static void cleanCache( Context context ){
+        DiskCacheManager.getInstance( context ).cleanCache();
     }
 }

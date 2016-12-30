@@ -174,4 +174,8 @@ public class DiskCacheManager {
         }
         return false ;
     }
+
+    public void cleanCache(){
+       mdiskCache.clearCache();
+    }
 }
