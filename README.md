@@ -2,7 +2,7 @@
 
 ## 如何使用
 
--  `compile 'com.zyj.lib:filepreferences:1.0.2'`
+-  `compile 'com.zyj.lib:filepreferences:1.0.3'`
 
 
 ## 如何存取数据
