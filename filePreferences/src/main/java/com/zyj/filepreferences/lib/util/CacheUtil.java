@@ -12,7 +12,7 @@ public class CacheUtil {
      * @param key
      * @return
      */
-    public static String hashKeyForDisk(String key) {
+    private static String hashKeyForDisk(String key) {
         String cacheKey;
         try {
             final MessageDigest mDigest = MessageDigest.getInstance("MD5");
@@ -24,7 +24,7 @@ public class CacheUtil {
         return cacheKey;
     }
 
-    public static String bytesToHexString(byte[] bytes) {
+    private static String bytesToHexString(byte[] bytes) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < bytes.length; i++) {
             String hex = Integer.toHexString(0xFF & bytes[i]);
@@ -36,4 +36,7 @@ public class CacheUtil {
         return sb.toString();
     }
 
+    public static String getKey(String key ){
+       return hashKeyForDisk( key );
+    }
 }

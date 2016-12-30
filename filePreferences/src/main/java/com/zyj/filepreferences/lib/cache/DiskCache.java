@@ -23,4 +23,6 @@ public interface DiskCache {
 
     void clearCache() ;
 
+    void removeCache( String key) ;
+
 }

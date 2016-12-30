@@ -34,4 +34,9 @@ public class FilePreferences {
     public static void cleanCache( Context context ){
         DiskCacheManager.getInstance( context ).cleanCache();
     }
+
+    public static void removeCache( Context context , String key ){
+        DiskCacheManager.getInstance( context).removeCache( key  );
+    }
+
 }

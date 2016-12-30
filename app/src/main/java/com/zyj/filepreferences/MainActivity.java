@@ -14,7 +14,7 @@ import com.zyj.filepreferences.lib.cache.InternalCacheDiskCacheFactory;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private TextView save_sync  , save_async , get_async , get_sync ,  change_tv ;
-    private TextView log_tv , cleanCache_tv ;
+    private TextView log_tv , cleanCache_tv , removeCache_tv ;
     private boolean log = false ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +30,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         change_tv = (TextView) findViewById( R.id.change );
 
         log_tv = (TextView) findViewById( R.id.log );
+
         cleanCache_tv = (TextView) findViewById( R.id.cleanCache );
         cleanCache_tv.setOnClickListener( this );
+
+        removeCache_tv = (TextView) findViewById( R.id.removeCache );
+        removeCache_tv.setOnClickListener( this );
 
         save_sync.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * 异步的方式，存入数据
      */
     void async_PUT(){
-        new FilePreferencesTask( this , "abc" , "123"){
+        new FilePreferencesTask( this , "abc" , "key_abc_value_哈哈哈"){
             @Override
             protected void callOnMainThread(Object result) {
                 //run on the UI thread
@@ -123,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * 同步的方式，获取数据
      */
     void sync_GET(){
-        String result = (String) FilePreferences.get( this , "abc" );
+        String result = (String) FilePreferences.get( this , "abcd" );
         Toast.makeText(MainActivity.this, "取数据: " + result , Toast.LENGTH_SHORT).show();
     }
 
@@ -131,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * 同步的方式，存入数据
      */
     void sync_PUT(){
-        boolean result = FilePreferences.put( this , "abc" , "123") ;
+        boolean result = FilePreferences.put( this , "abcd" , "key_abcd_value_哈哈哈") ;
         Toast.makeText(MainActivity.this, "存入数据成功", Toast.LENGTH_SHORT).show();
     }
 
@@ -153,6 +157,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch ( v.getId() ){
             case R.id.cleanCache :
                 cleanChche();
+                break;
+
+            case R.id.removeCache :
+                FilePreferences.removeCache( MainActivity.this , "abc");
                 break;
         }
     }

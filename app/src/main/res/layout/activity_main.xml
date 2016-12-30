@@ -11,56 +11,108 @@
     android:orientation="vertical"
     tools:context="com.zyj.filepreferences.MainActivity">
 
-    <TextView
-        android:id="@+id/save_sync"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="同步存数据"
-        android:padding="10dp"
-        android:background="#ffcc00"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        android:gravity="center"
-        />
+        android:orientation="horizontal"
+        >
 
-    <TextView
-        android:id="@+id/save_async"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="异步存数据"
-        android:padding="10dp"
-        android:background="#ffcc00"
-        android:textSize="20sp"
-        android:gravity="center"
-        android:layout_marginTop="10dp"
-        android:textColor="#ffffff"
-        />
+        <TextView
+            android:id="@+id/save_sync"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="同步存数据"
+            android:padding="10dp"
+            android:background="#ffcc00"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_weight="1"
+            />
 
-    <TextView
-        android:id="@+id/get_sync"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="同步取数据"
-        android:padding="10dp"
-        android:background="#ff5566"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        android:gravity="center"
-        android:layout_marginTop="10dp"
-        />
+        <TextView
+            android:id="@+id/get_sync"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="同步取数据"
+            android:padding="10dp"
+            android:background="#ff5566"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_weight="1"
+            />
 
-    <TextView
-        android:id="@+id/get_async"
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="异步取数据"
-        android:padding="10dp"
-        android:background="#ff5566"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        android:gravity="center"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:id="@+id/save_async"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="异步存数据"
+            android:padding="10dp"
+            android:background="#ffcc00"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:layout_weight="1"
+            />
+
+        <TextView
+            android:id="@+id/get_async"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="异步取数据"
+            android:padding="10dp"
+            android:background="#ff5566"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_weight="1"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_marginTop="10dp"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:id="@+id/cleanCache"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="清理缓存"
+            android:padding="10dp"
+            android:background="#445566"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_weight="1"
+            />
+
+        <TextView
+            android:id="@+id/removeCache"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="清理指定的缓存"
+            android:padding="10dp"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:background="#ff5566"
+            />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/change"
@@ -80,19 +132,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Log（关闭）"
-        android:padding="10dp"
-        android:background="#445566"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        android:gravity="center"
-        android:layout_marginTop="10dp"
-        />
-
-    <TextView
-        android:id="@+id/cleanCache"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="清理缓存"
         android:padding="10dp"
         android:background="#445566"
         android:textColor="#ffffff"

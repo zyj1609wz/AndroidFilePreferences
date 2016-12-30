@@ -59,7 +59,7 @@ public class DiskCacheManager {
         ByteArrayOutputStream baos = null ;
 
         try {
-            String md5Key = CacheUtil.hashKeyForDisk( key );
+            String md5Key = CacheUtil.getKey( key );
             DiskLruCache.Snapshot snapShot = diskLruCache.get(md5Key);
             if ( snapShot != null ){
                 is = snapShot.getInputStream(0);
@@ -107,7 +107,7 @@ public class DiskCacheManager {
             return false ;
         }
 
-        String md5Key = CacheUtil.hashKeyForDisk( key ) ;
+        String md5Key = CacheUtil.getKey( key );
 
         DiskLruCache.Editor editor = null ;
         InputStream inputStream = null ;
@@ -178,4 +178,9 @@ public class DiskCacheManager {
     public void cleanCache(){
        mdiskCache.clearCache();
     }
+
+    public void removeCache( String key ){
+        mdiskCache.removeCache(  CacheUtil.getKey( key ) );
+    }
+
 }

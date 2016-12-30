@@ -76,29 +76,35 @@ FilePreferences内置了一个Log类，方便打印Log日志，提供了关闭�
 
 ```
  new FilePreferencesTask( this , "abc" ){
-            @Override
-            protected Object callOnSubThread(Object result) {
-                //run on the background thread
-                return result ;
-            }
+        @Override
+        protected Object callOnSubThread(Object result) {
+            //run on the background thread
+            return result ;
+        }
 
-            @Override
-            protected void callOnMainThread(Object result) {
-                //run on the UI thread
-                Toast.makeText(MainActivity.this, "取数据: " + result , Toast.LENGTH_SHORT).show();
-            }
-        }.execute();
+        @Override
+        protected void callOnMainThread(Object result) {
+            //run on the UI thread
+            Toast.makeText(MainActivity.this, "取数据: " + result , Toast.LENGTH_SHORT).show();
+        }
+    }.execute();
 ```
 
-- 清理缓存,需要在子线程中调用
+- 清理所有的值,需要在子线程中调用
 
- FilePreferences.cleanCache( MainActivity.this );
+ `FilePreferences.cleanCache( MainActivity.this );`
+
+- 清除指定的值
+
+`FilePreferences.removeCache( MainActivity.this , "key");`
 
 ## 更新日志
 ### `2016/12/30`
 
 - 1、1.0.3 发布
 - 2、修改缓存默认大小
+- 3、增加清除缓存功能
+- 4、增加清除指定缓存功能
 
 
 ### `2016/12/29`
