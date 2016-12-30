@@ -1,11 +1,9 @@
 package com.zyj.filepreferences;
-import android.Manifest;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.zyj.filepreferences.lib.FilePreferences;
 import com.zyj.filepreferences.lib.FilePreferencesTask;
 import com.zyj.filepreferences.lib.cache.ExternalCacheDiskCacheFactory;
@@ -80,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 log = !log ;
-                FilePreferences.setLog( false );
+                FilePreferences.setLog( log );
                 log_tv.setText( log ? "Log(已打开)" :"Log(已关闭)");
             }
         });
@@ -94,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             protected Object callOnSubThread(Object result) {
                 //run on the background thread
-                return result ;
+                return result  ;
             }
 
             @Override
