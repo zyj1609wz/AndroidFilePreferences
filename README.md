@@ -69,7 +69,9 @@ FilePreferences内置了一个Log类，方便打印Log日志，提供了关闭�
 `FilePreferences.setLog( false );`
 
 ## 高级功能
-异步从文件获取数据的时候，默认是把结果回调在UI线程，可以重写`callOnSubThread`方法，让结果回调在子线程。
+- 在子线程处理回调的结果
+
+异步从文件获取数据的时候，默认是把结果回调在UI线程，可以重写`callOnSubThread`方法，让结果回调在子线程，那么`callOnMainThread`回调的结果将是`callOnSubThread`的返回值。
 
 ```
  new FilePreferencesTask( this , "abc" ){
