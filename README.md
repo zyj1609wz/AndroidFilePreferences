@@ -71,6 +71,21 @@ FilePreferences内置了一个Log类，方便打印Log日志，提供了关闭�
 ## 高级功能
 异步从文件获取数据的时候，默认是把结果回调在UI线程，可以重写`callOnSubThread`方法，让结果回调在子线程。
 
+```
+ new FilePreferencesTask( this , "abc" ){
+            @Override
+            protected Object callOnSubThread(Object result) {
+                //run on the background thread
+                return result ;
+            }
+
+            @Override
+            protected void callOnMainThread(Object result) {
+                //run on the UI thread
+                Toast.makeText(MainActivity.this, "取数据: " + result , Toast.LENGTH_SHORT).show();
+            }
+        }.execute();
+```
 
 
 ## 更新日志
