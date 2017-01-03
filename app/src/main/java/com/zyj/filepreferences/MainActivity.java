@@ -1,8 +1,6 @@
 package com.zyj.filepreferences;
-import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,7 +9,6 @@ import com.zyj.filepreferences.lib.FilePreferencesTask;
 import com.zyj.filepreferences.lib.cache.ExternalCacheDiskCacheFactory;
 import com.zyj.filepreferences.lib.cache.ExternalSDCardCacheDiskCacheFactory;
 import com.zyj.filepreferences.lib.cache.InternalCacheDiskCacheFactory;
-import com.zyj.filepreferences.lib.util.LogUtil;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -124,7 +121,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             protected void callOnMainThread(Object result) {
                 //run on the UI thread
-                Toast.makeText(MainActivity.this, "存入数据成功", Toast.LENGTH_SHORT).show();
+                if ( ( Boolean) result ){
+                    Toast.makeText(MainActivity.this, "存入数据成功", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(MainActivity.this, "存入数据  失败", Toast.LENGTH_SHORT).show();
+                }
             }
         }.execute();
     }
@@ -142,7 +143,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     void sync_PUT(){
         boolean result = FilePreferences.put( this , "abcd" , "key_abcd_value_哈哈哈") ;
-        Toast.makeText(MainActivity.this, "存入数据成功", Toast.LENGTH_SHORT).show();
+        if (  result ){
+            Toast.makeText(MainActivity.this, "存入数据  成功", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(MainActivity.this, "存入数据  失败", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     /**

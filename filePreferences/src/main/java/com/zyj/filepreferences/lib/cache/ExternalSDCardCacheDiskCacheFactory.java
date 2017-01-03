@@ -1,12 +1,8 @@
 package com.zyj.filepreferences.lib.cache;
-
-import android.app.Activity;
 import android.content.Context;
 import android.os.Environment;
 import android.text.TextUtils;
-
 import com.zyj.filepreferences.lib.util.PermissionUtil;
-
 import java.io.File;
 
 /**
@@ -50,11 +46,7 @@ public class ExternalSDCardCacheDiskCacheFactory extends DiskCacheFactory {
     @Override
     public File getCacheDirectory() {
         if ( mcontext == null ) return null ;
-
-        if( mcontext instanceof Activity) {
-            PermissionUtil.verifyStoragePermissions(mcontext);
-        }
-
+        PermissionUtil.verifyStoragePermissions( mcontext );
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
                 || !Environment.isExternalStorageRemovable()) {
             String sdroot = Environment.getExternalStorageDirectory().getPath()  ;

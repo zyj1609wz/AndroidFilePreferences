@@ -3,7 +3,7 @@ package com.zyj.filepreferences.lib.cache;
 import android.content.Context;
 import android.os.Environment;
 import android.text.TextUtils;
-
+import com.zyj.filepreferences.lib.util.PermissionUtil;
 import java.io.File;
 
 /**
@@ -47,6 +47,7 @@ public class ExternalCacheDiskCacheFactory extends DiskCacheFactory {
     @Override
     public File getCacheDirectory() {
         if ( mcontext == null ) return null ;
+        PermissionUtil.verifyStoragePermissions( mcontext );
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
                 || !Environment.isExternalStorageRemovable()) {
             return new File( mcontext.getExternalCacheDir().getPath() , mcacheDirectory ) ;

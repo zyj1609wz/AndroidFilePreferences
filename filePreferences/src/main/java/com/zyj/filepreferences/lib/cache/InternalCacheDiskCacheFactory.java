@@ -1,10 +1,6 @@
 package com.zyj.filepreferences.lib.cache;
-
 import android.content.Context;
 import android.text.TextUtils;
-
-import com.zyj.filepreferences.lib.cache.DiskCacheFactory;
-
 import java.io.File;
 
 /**

@@ -125,7 +125,6 @@ public class DiskCacheManager {
                 LogUtil.d( "filePreferences : 缓存写入成功");
                 return  true ;
             }
-
         } catch (IOException e) {
             e.printStackTrace();
             if ( editor != null ){

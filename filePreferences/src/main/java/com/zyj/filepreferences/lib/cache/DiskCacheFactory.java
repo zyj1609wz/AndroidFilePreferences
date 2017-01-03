@@ -1,7 +1,5 @@
 package com.zyj.filepreferences.lib.cache;
-
 import com.zyj.filepreferences.lib.disklrucache.DiskLruCache;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -22,6 +20,7 @@ public abstract class DiskCacheFactory implements DiskCache {
         }
 
         boolean check = !cacheDir.mkdirs() && (!cacheDir.exists() || !cacheDir.isDirectory()) ;
+
         if ( check ) {
             return null ;
         }
