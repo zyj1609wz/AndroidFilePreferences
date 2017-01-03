@@ -25,4 +25,5 @@ public interface DiskCache {
 
     void removeCache( String key) ;
 
+    long getTotalCacheSize() ;
 }

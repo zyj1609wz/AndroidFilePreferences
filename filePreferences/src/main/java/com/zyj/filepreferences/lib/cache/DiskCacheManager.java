@@ -183,4 +183,12 @@ public class DiskCacheManager {
         mdiskCache.removeCache(  CacheUtil.getKey( key ) );
     }
 
+    /**
+     * get diskCache size
+     * @return
+     */
+    public long getDiskCacheSize(){
+        return mdiskCache.getTotalCacheSize() ;
+    }
+
 }

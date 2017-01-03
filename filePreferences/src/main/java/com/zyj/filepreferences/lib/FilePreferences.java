@@ -39,4 +39,8 @@ public class FilePreferences {
         DiskCacheManager.getInstance( context).removeCache( key  );
     }
 
+    public static Long getDiskCacheSize( Context context ){
+      return DiskCacheManager.getInstance( context).getDiskCacheSize() ;
+    }
+
 }

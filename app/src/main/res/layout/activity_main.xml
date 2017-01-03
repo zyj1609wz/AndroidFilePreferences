@@ -114,6 +114,41 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:id="@+id/log"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Log（关闭）"
+            android:padding="10dp"
+            android:background="#DAA520"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            />
+
+        <TextView
+            android:id="@+id/cacheSize_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="获取缓存大小"
+            android:padding="10dp"
+            android:background="#445566"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/change"
         android:layout_width="match_parent"
@@ -127,17 +162,6 @@
         android:layout_marginTop="10dp"
         />
 
-    <TextView
-        android:id="@+id/log"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Log（关闭）"
-        android:padding="10dp"
-        android:background="#445566"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        android:gravity="center"
-        android:layout_marginTop="10dp"
-        />
+
 
 </LinearLayout>

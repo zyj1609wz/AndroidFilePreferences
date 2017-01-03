@@ -59,4 +59,13 @@ public abstract class DiskCacheFactory implements DiskCache {
             }
         }
     }
+
+    @Override
+    public long getTotalCacheSize() {
+        DiskLruCache diskLruCache =  getDiskLruCache() ;
+        if ( diskLruCache != null ){
+            return diskLruCache.size() ;
+        }
+        return 0;
+    }
 }

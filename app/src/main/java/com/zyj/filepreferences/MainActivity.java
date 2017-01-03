@@ -2,6 +2,7 @@ package com.zyj.filepreferences;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -10,11 +11,13 @@ import com.zyj.filepreferences.lib.FilePreferencesTask;
 import com.zyj.filepreferences.lib.cache.ExternalCacheDiskCacheFactory;
 import com.zyj.filepreferences.lib.cache.ExternalSDCardCacheDiskCacheFactory;
 import com.zyj.filepreferences.lib.cache.InternalCacheDiskCacheFactory;
+import com.zyj.filepreferences.lib.util.LogUtil;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private TextView save_sync  , save_async , get_async , get_sync ,  change_tv ;
-    private TextView log_tv , cleanCache_tv , removeCache_tv ;
+    private TextView cleanCache_tv , removeCache_tv ;
+    private TextView log_tv , cacheSize_tv  ;
     private boolean log = false ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         removeCache_tv = (TextView) findViewById( R.id.removeCache );
         removeCache_tv.setOnClickListener( this );
+
+        cacheSize_tv = (TextView) findViewById( R.id.cacheSize_tv );
+        cacheSize_tv.setOnClickListener( this );
 
         save_sync.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,6 +157,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }).start();
     }
 
+    private String sizeToChange( long size ){
+        java.text.DecimalFormat df   =new   java.text.DecimalFormat("#.00");  //字符格式化，为保留小数做准备
+
+        double G = size * 1.0 / 1024 / 1204 /1024 ;
+        if ( G >= 1 ){
+            return df.format( G ) + "GB";
+        }
+
+        double M = size * 1.0 / 1024 / 1204  ;
+        if ( M >= 1 ){
+            return df.format( M ) + "MB";
+        }
+
+        double K = size  * 1.0 / 1024   ;
+        if ( K >= 1 ){
+            return df.format( K ) + "KB";
+        }
+
+        return size + "Byte" ;
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -161,6 +188,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.removeCache :
                 FilePreferences.removeCache( MainActivity.this , "abc");
+                break;
+
+            case R.id.cacheSize_tv :
+                Long size = FilePreferences.getDiskCacheSize( MainActivity.this ) ;
+                cacheSize_tv.setText( "" + sizeToChange( size ) );
                 break;
         }
     }

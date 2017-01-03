@@ -98,7 +98,45 @@ FilePreferences内置了一个Log类，方便打印Log日志，提供了关闭�
 
 `FilePreferences.removeCache( MainActivity.this , "key");`
 
+- 获取缓存大小
+
+`Long size = FilePreferences.getDiskCacheSize( MainActivity.this ) ;`
+
+提供一个方法，进行大小格式计算
+
+```
+private String sizeToChange( long size ){
+    //字符格式化，为保留小数做准备
+    java.text.DecimalFormat df   =new   java.text.DecimalFormat("#.00");
+
+    double G = size * 1.0 / 1024 / 1204 /1024 ;
+    if ( G >= 1 ){
+        return df.format( G ) + "GB";
+    }
+
+    double M = size * 1.0 / 1024 / 1204  ;
+    if ( M >= 1 ){
+        return df.format( M ) + "MB";
+    }
+
+    double K = size  * 1.0 / 1024   ;
+    if ( K >= 1 ){
+        return df.format( K ) + "KB";
+    }
+
+    return size + "Byte" ;
+}
+
+```
+
 ## 更新日志
+
+### `2017/1/3`
+
+- 1、1.0.4 发布
+- 2、增加获取缓存大小的API
+
+
 ### `2016/12/30`
 
 - 1、1.0.3 发布
