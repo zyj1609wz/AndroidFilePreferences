@@ -137,8 +137,8 @@ Filepreferences需要的权限
 `<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>`
 
 - 在使用aar集成`Filepreferences`的时候，默认在`AndroidManifest.xml`中配置好了所需要的权限，你不需要做额外的配置。
-- 在使用jar包集成`Filepreferences`的时候，你需要在你项目中的`AndroidManifest.xml`文件中，添加SD卡写权限
-- 在`安卓6.0`及以上版本，`WRITE_EXTERNAL_STORAGE`属于危险权限，所以你在调用`Filepreferences`的API的前，需要你自己动态申请SD卡写权限。
+- 在使用jar包集成`Filepreferences`的时候，你需要在你项目中的`AndroidManifest.xml`文件中，添加SD卡写权限。
+- 在`安卓6.0`及以上版本，`WRITE_EXTERNAL_STORAGE`属于危险权限，`Filepreferences`默认集成一个精简的权限动态申请，没有权限申请结果回调。如果你要接收申请结果，需要你自己在调用`Filepreferences`的API的前，需要你自己动态申请SD卡写权限。
 - 在`安卓6.0`以下版本，不需要动态权限申请。
 
 
