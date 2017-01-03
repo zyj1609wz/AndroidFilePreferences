@@ -2,8 +2,9 @@
 
 ## 如何使用
 
--  `compile 'com.zyj.lib:filepreferences:1.0.3'`
+-  `compile 'com.zyj.lib:filepreferences:1.0.4'`
 
+[点击这里获取最新版本号](http://jcenter.bintray.com/com/zyj/lib/filepreferences/)
 
 ## 如何存取数据
 
