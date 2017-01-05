@@ -2,7 +2,6 @@ package com.zyj.filepreferences.lib.cache;
 
 import android.content.Context;
 import android.text.TextUtils;
-
 import com.zyj.filepreferences.lib.disklrucache.DiskLruCache;
 import com.zyj.filepreferences.lib.util.CacheUtil;
 import com.zyj.filepreferences.lib.util.LogUtil;
@@ -46,39 +45,32 @@ public class DiskCacheManager {
             return null ;
         }
 
-        DiskLruCache diskLruCache = mdiskCache.getDiskLruCache() ;
-        if ( diskLruCache == null ){
-            LogUtil.d( "filePreferences: read  diskLruCache == null" );
-            return "" ;
+        InputStream inputStream = getInputStream( key ) ;
+        if ( inputStream == null ) {
+            return null;
         }
 
         LogUtil.d( "filePreferences: isReading, key: " + key );
 
-        InputStream is = null ;
         String result = "" ;
         ByteArrayOutputStream baos = null ;
-
         try {
-            String md5Key = CacheUtil.getKey( key );
-            DiskLruCache.Snapshot snapShot = diskLruCache.get(md5Key);
-            if ( snapShot != null ){
-                is = snapShot.getInputStream(0);
-                baos = new ByteArrayOutputStream();
-                int len = -1;
-                byte[] buf = new byte[128];
+            baos = new ByteArrayOutputStream();
+            int len = -1;
+            byte[] buf = new byte[128];
 
-                while ((len = is.read(buf)) != -1) {
-                    baos.write(buf, 0, len);
-                }
-                baos.flush();
-                result = baos.toString() ;
+            while ((len = inputStream.read(buf)) != -1) {
+                baos.write(buf, 0, len);
             }
+            baos.flush();
+            result = baos.toString() ;
+
         } catch (IOException e) {
             e.printStackTrace();
         }finally {
-            if ( is != null ){
+            if ( inputStream != null ){
                 try {
-                    is.close();
+                    inputStream.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -118,7 +110,7 @@ public class DiskCacheManager {
             editor = diskLruCache.edit( md5Key );
             if ( editor != null ){
                 outputStream = editor.newOutputStream( 0 ) ;
-                byte bytes[]= new byte[1024];
+                byte bytes[]= null ;
                 bytes= value.getBytes( "UTF-8"); //新加的
                 outputStream.write( bytes );
                 editor.commit();
@@ -174,8 +166,86 @@ public class DiskCacheManager {
         return false ;
     }
 
+    private InputStream getInputStream( String key ){
+        DiskLruCache diskLruCache = mdiskCache.getDiskLruCache() ;
+        if ( diskLruCache == null ) {
+            LogUtil.d( "filePreferences: getInputStream , diskLruCache == null" );
+            return null ;
+        }
+        try {
+            String md5Key = CacheUtil.getKey( key );
+            DiskLruCache.Snapshot snapShot = diskLruCache.get(md5Key);
+            if ( snapShot != null ){
+                return snapShot.getInputStream(0);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null ;
+        }
+        return null ;
+    }
+
+    private Outer getOuter( String key ){
+        DiskLruCache diskLruCache = mdiskCache.getDiskLruCache() ;
+        if ( diskLruCache == null ) {
+            LogUtil.d( "filePreferences: getOutputStream , diskLruCache == null" );
+            return null ;
+        }
+
+        String md5Key = CacheUtil.getKey( key );
+        DiskLruCache.Editor editor = null;
+        try {
+            editor = diskLruCache.edit( md5Key );
+            if ( editor != null ){
+                Outer outer = new Outer() ;
+                outer.editor = editor ;
+                outer.outputStream = editor.newOutputStream( 0 ) ;
+                return outer ;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null ;
+        }
+        return null ;
+    }
+
+    private byte[] getBytes(String key){
+        byte[] res = null;
+        InputStream is = getInputStream( key ) ;
+        if ( is == null) return null ;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try {
+            byte[] buf = new byte[256];
+            int len = 0;
+            while ((len = is.read(buf)) != -1) {
+                baos.write(buf, 0, len);
+            }
+            res = baos.toByteArray();
+            return res ;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if ( is != null ){
+                try {
+                    is.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if ( baos != null ){
+                try {
+                    baos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return res;
+    }
+
+
     public void cleanCache(){
-       mdiskCache.clearCache();
+        mdiskCache.clearCache();
     }
 
     public void removeCache( String key ){
@@ -189,5 +259,7 @@ public class DiskCacheManager {
     public long getDiskCacheSize(){
         return mdiskCache.getTotalCacheSize() ;
     }
+
+
 
 }
