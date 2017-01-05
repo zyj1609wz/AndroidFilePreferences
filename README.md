@@ -141,9 +141,20 @@ Filepreferences需要的权限
 - 在`安卓6.0`及以上版本，`WRITE_EXTERNAL_STORAGE`属于危险权限，`Filepreferences`默认集成一个精简的权限动态申请，没有权限申请结果回调。如果你要接收申请结果，需要你自己在调用`Filepreferences`的API的前，需要你自己动态申请SD卡写权限。
 - 在`安卓6.0`以下版本，不需要动态权限申请。
 
+## 参考资料
+- [https://github.com/zyj1609wz/Imageloader](https://github.com/zyj1609wz/Imageloader)
+- [Android 缓存](http://www.cnblogs.com/zhaoyanjun/p/5818943.html)
+- [https://github.com/JakeWharton/DiskLruCache](https://github.com/JakeWharton/DiskLruCache)
+- [Android DiskLruCache完全解析，硬盘缓存的最佳方案](http://blog.csdn.net/guolin_blog/article/details/28863651)
+- [Android DiskLruCache 源码解析 硬盘缓存的绝佳方案](http://blog.csdn.net/lmj623565791/article/details/47251585)
+- [https://github.com/hongyangAndroid/base-diskcache](https://github.com/hongyangAndroid/base-diskcache)
 
 ## 更新日志
 ### `2017/1/5`
+- 1、新增参考资料文档
+
+
+### `2017/1/4`
 
 - 1、1.0.5 发布
 - 2、修改6.0手机权限读取问题
