@@ -71,7 +71,7 @@ FilePreferences内置了一个Log类，方便打印Log日志，提供了关闭�
 
 ## 高级功能
 
-- `在子线程处理回调的结果`
+### `在子线程处理回调的结果`
 
 异步从文件获取数据的时候，默认是把结果回调在UI线程，可以重写`callOnSubThread`方法，让结果回调在子线程，那么`callOnMainThread`回调的结果将是`callOnSubThread`的返回值。
 
@@ -91,26 +91,28 @@ FilePreferences内置了一个Log类，方便打印Log日志，提供了关闭�
     }.execute();
 ```
 
-- 清理所有的值,需要在子线程中调用
+### 清理所有的值,需要在子线程中调用
 
  `FilePreferences.cleanCache( MainActivity.this );`
 
-- 清除指定的值
+### 清除指定的值
 
 `FilePreferences.removeCache( MainActivity.this , "key");`
 
-- 获取缓存大小
+### 获取缓存大小
 
 `Long size = FilePreferences.getDiskCacheSize( MainActivity.this ) ;`
 
 提供一个方法，进行大小格式计算
+
+- 方法1 :
 
 ```
 private String sizeToChange( long size ){
     //字符格式化，为保留小数做准备
     java.text.DecimalFormat df   =new   java.text.DecimalFormat("#.00");
 
-    double G = size * 1.0 / 1024 / 1204 /1024 ;
+    double G = size * 1.0 / 1024 / 1024 /1024 ;
     if ( G >= 1 ){
         return df.format( G ) + "GB";
     }
@@ -130,6 +132,9 @@ private String sizeToChange( long size ){
 
 ```
 
+- 方法二
+
+`Formatter.formatFileSize( MainActivity.this , long size ) ;`
 
 ## 权限
 Filepreferences需要的权限
@@ -152,7 +157,7 @@ Filepreferences需要的权限
 ## 更新日志
 ### `2017/1/5`
 - 1、新增参考资料文档
-
+- 2、修改说明文档
 
 ### `2017/1/4`
 
