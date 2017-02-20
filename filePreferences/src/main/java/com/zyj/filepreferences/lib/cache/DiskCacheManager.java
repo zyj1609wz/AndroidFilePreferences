@@ -5,13 +5,10 @@ import android.text.TextUtils;
 import com.zyj.filepreferences.lib.disklrucache.DiskLruCache;
 import com.zyj.filepreferences.lib.util.CacheUtil;
 import com.zyj.filepreferences.lib.util.LogUtil;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 
 /**
  * Created by ${zyj} on 2016/9/2.
@@ -41,10 +38,7 @@ public class DiskCacheManager {
     }
 
     public String read(String key ){
-        if (TextUtils.isEmpty( key )){
-            LogUtil.d( "filePreferences: read , the key ==  null" );
-            return null ;
-        }
+        checkKey( key );
 
         InputStream inputStream = getInputStream( key ) ;
         if ( inputStream == null ) {
@@ -58,7 +52,7 @@ public class DiskCacheManager {
         try {
             baos = new ByteArrayOutputStream();
             int len = -1;
-            byte[] buf = new byte[128];
+            byte[] buf = new byte[1024];
 
             while ((len = inputStream.read(buf)) != -1) {
                 baos.write(buf, 0, len);
@@ -69,16 +63,17 @@ public class DiskCacheManager {
         } catch (IOException e) {
             e.printStackTrace();
         }finally {
-            if ( inputStream != null ){
+            if ( baos != null ){
                 try {
-                    inputStream.close();
+                    baos.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-            if ( baos != null ){
+
+            if ( inputStream != null ){
                 try {
-                    baos.close();
+                    inputStream.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -89,10 +84,7 @@ public class DiskCacheManager {
     }
 
     public Boolean write( String key , String value){
-        if (TextUtils.isEmpty( key )){
-            LogUtil.d( "filePreferences: write , the key ==  null" );
-            return false ;
-        }
+        checkKey( key );
 
         DiskLruCache diskLruCache = mdiskCache.getDiskLruCache() ;
         if ( diskLruCache == null ) {
@@ -103,16 +95,13 @@ public class DiskCacheManager {
         String md5Key = CacheUtil.getKey( key );
 
         DiskLruCache.Editor editor = null ;
-        InputStream inputStream = null ;
         OutputStream outputStream = null ;
-        BufferedOutputStream bufferedOutputStream = null;
-        BufferedInputStream bufferedInputStream = null;
         try {
             editor = diskLruCache.edit( md5Key );
             if ( editor != null ){
                 outputStream = editor.newOutputStream( 0 ) ;
                 byte bytes[]= null ;
-                bytes= value.getBytes( "UTF-8"); //新加的
+                bytes= value.getBytes( "UTF-8");
                 outputStream.write( bytes );
                 editor.commit();
                 LogUtil.d( "filePreferences : 缓存写入成功");
@@ -134,31 +123,9 @@ public class DiskCacheManager {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            if ( inputStream != null ){
-                try {
-                    inputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
             if ( outputStream != null ){
                 try {
                     outputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            if ( bufferedInputStream != null ){
-                try {
-                    bufferedInputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            if ( bufferedOutputStream != null ){
-                try {
-                    bufferedOutputStream.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -210,40 +177,6 @@ public class DiskCacheManager {
         return null ;
     }
 
-    private byte[] getBytes(String key){
-        byte[] res = null;
-        InputStream is = getInputStream( key ) ;
-        if ( is == null) return null ;
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        try {
-            byte[] buf = new byte[256];
-            int len = 0;
-            while ((len = is.read(buf)) != -1) {
-                baos.write(buf, 0, len);
-            }
-            res = baos.toByteArray();
-            return res ;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }finally {
-            if ( is != null ){
-                try {
-                    is.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            if ( baos != null ){
-                try {
-                    baos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return res;
-    }
-
 
     public void cleanCache(){
         mdiskCache.clearCache();
@@ -261,6 +194,11 @@ public class DiskCacheManager {
         return mdiskCache.getTotalCacheSize() ;
     }
 
+    private void checkKey( String key){
+        if (TextUtils.isEmpty( key )){
+            throw new IllegalArgumentException("the key must be is not empty");
+        }
+    }
 
 
 }
